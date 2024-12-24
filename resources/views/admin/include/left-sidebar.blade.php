@@ -22,8 +22,8 @@
                         <span class="hide-menu">Category</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="app-calendar.html">Add Category</a></li>
-                        <li><a href="app-chat.html">Manage Category</a></li>
+                        <li><a href="{{route('category.add')}}">Add Category</a></li>
+                        <li><a href="{{route('category.manage')}}">Manage Category</a></li>
                     </ul>
                 </li>
                 <li>
@@ -32,8 +32,8 @@
                         <span class="hide-menu">Sub Category</span>
                     </a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="app-email.html">Add Sub Category</a></li>
-                        <li><a href="app-email-detail.html">Manage Sub Category</a></li>
+                        <li><a href="{{route('subcategory.add')}}">Add Sub Category</a></li>
+                        <li><a href="{{route('subcategory.manage')}}">Manage Sub Category</a></li>
                     </ul>
                 </li>
                 <li>
