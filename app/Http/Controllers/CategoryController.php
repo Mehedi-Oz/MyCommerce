@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -21,7 +21,7 @@ class CategoryController extends Controller
     public function manage()
     {
         return view('admin.category.manage', [
-            'categories' => Category::orderBy('name', 'asc')->get()
+            'categories' => Category::all()
         ]);
     }
 
@@ -51,4 +51,5 @@ class CategoryController extends Controller
         Category::deleteCategory($request);
         return back()->with('message', 'Category deleted successfully!!');
     }
+
 }

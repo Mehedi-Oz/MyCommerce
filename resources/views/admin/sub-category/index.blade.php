@@ -44,7 +44,6 @@
                         <div class="form-group row">
                             <label for="exampleInputEmail3" class="col-sm-3 control-label">
                                 Sub-Category Description
-                                <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9">
                             <textarea class="form-control" id="exampleInputEmail3" rows="10" name="description"
@@ -66,8 +65,7 @@
                         </div>
                         <div class="form-group row m-b-0">
                             <div class="offset-sm-3 col-sm-9">
-                                <button type="submit" class="btn btn-success waves-effect waves-light text-white">Create
-                                    Sub-Category
+                                <button type="submit" class="btn btn-success waves-effect waves-light text-white">Create New Sub-Category
                                 </button>
                             </div>
                         </div>

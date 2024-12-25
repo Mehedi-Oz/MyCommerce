@@ -11,7 +11,7 @@ class SubCategory extends Model
     public static function store($request)
     {
         self::$subcategory = new SubCategory();
-        self::$subcategory->caregory_id = $request->caregory_id;
+        self::$subcategory->category_id = $request->category_id;
         self::$subcategory->name = $request->name;
         self::$subcategory->description = $request->description;
         self::$subcategory->status = $request->status;
@@ -44,7 +44,7 @@ class SubCategory extends Model
     {
         self::$subcategory = SubCategory::find($request->id);
 
-        self::$subcategory->caregory_id = $request->caregory_id;
+        self::$subcategory->category_id = $request->category_id;
         self::$subcategory->name = $request->name;
         self::$subcategory->description = $request->description;
 

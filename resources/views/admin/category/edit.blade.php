@@ -10,13 +10,13 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Update A Product Category</h4> <span
+                    <h4 class="card-title">Update Product Category</h4> <span
                         class="text-success"> {{session('message')}} </span>
 
                     <form class="form-horizontal p-t-20" action="{{route('category.update', ['id'=>$category->id])}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
-{{--                        <input type="hidden" name="id" id="{{$category->id}}">--}}
+                        {{--                        <input type="hidden" name="id" id="{{$category->id}}">--}}
 
 
                         <div class="form-group row">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group row m-b-0">
                             <div class="offset-sm-3 col-sm-9">
-                                <button type="submit" class="btn btn-success waves-effect waves-light text-white">Create
+                                <button type="submit" class="btn btn-success waves-effect waves-light text-white">Update
                                     Category
                                 </button>
                             </div>

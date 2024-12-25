@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-
     public static $category, $image, $imageNewName, $directory, $imgUrl;
+
+    protected $fillable = ['name', 'description', 'image', 'status'];
 
     public static function store($request)
     {

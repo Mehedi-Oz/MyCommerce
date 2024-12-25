@@ -2,25 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SubCategory;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Models\SubCategory;
 
 class SubCategoryController extends Controller
 {
     public function index()
     {
-
-        return view('admin.sub-category.index', [
+        return view('admin.sub-category.index',[
             'categories' => Category::all()
         ]);
     }
 
     public function create(Request $request)
     {
-//        return $request;
         SubCategory::store($request);
-        return back()->with('message', 'Sub-Category added successfully!!');
+        return back()->with('message', 'Category added successfully!!');
     }
 
     public function manage()
@@ -33,7 +31,8 @@ class SubCategoryController extends Controller
     public function edit($id)
     {
         return view('admin.sub-category.edit', [
-            'subcategory' => SubCategory::find($id)
+            'subcategory' => SubCategory::find($id),
+            'categories' => Category::all()
         ]);
     }
 
@@ -47,13 +46,13 @@ class SubCategoryController extends Controller
     {
 //        return $request;
         SubCategory::updateSubCategory($request);
-        return back()->with('message', 'Sub-Category updated successfully!!');
+        return back()->with('message', 'SubCategory updated successfully!!');
     }
 
     public function remove(Request $request)
     {
 //        return $request;
         SubCategory::deleteSubCategory($request);
-        return back()->with('message', 'Sub-Category deleted successfully!!');
+        return back()->with('message', 'SubCategory deleted successfully!!');
     }
 }

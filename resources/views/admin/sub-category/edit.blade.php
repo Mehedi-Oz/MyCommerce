@@ -25,16 +25,17 @@
                             </label>
                             <div class="col-sm-9">
                                 <select class="form-control" name="category_id">
-                                    <option value="" disabled selected> --Select Category-- </option>
+                                    <option value="" disabled selected> --Select Category--</option>
                                     @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        <option
+                                            value="{{$category->id}}" {{$category->id==$subcategory->category_id? 'selected' : ""}}>{{$category->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="exampleInputuname3" class="col-sm-3 control-label">
-                                SubCategory Name
+                                Sub Category Name
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9">
@@ -45,8 +46,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="exampleInputEmail3" class="col-sm-3 control-label">
-                                SubCategory Description
-                                <span class="text-danger">*</span>
+                                Sub Category Description
                             </label>
                             <div class="col-sm-9">
                             <textarea class="form-control" id="exampleInputEmail3" name="description" rows="5"
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="form-label col-sm-3 control-label" for="web">SubCategory Image</label>
+                            <label class="form-label col-sm-3 control-label" for="web">Sub Category Image</label>
                             <div class="col-sm-9">
                                 <input type="file" id="input-file-now" class="dropify" name="image"/>
                                 <img src="{{asset($subcategory->image)}}"
@@ -72,7 +72,7 @@
                         </div>
                         <div class="form-group row m-b-0">
                             <div class="offset-sm-3 col-sm-9">
-                                <button type="submit" class="btn btn-success waves-effect waves-light text-white">Create
+                                <button type="submit" class="btn btn-success waves-effect waves-light text-white">Update
                                     Sub-Category
                                 </button>
                             </div>

@@ -30,6 +30,7 @@
 
 <!-- jQuery file upload -->
 <script src="{{asset('admin-asset')}}/assets/node_modules/dropify/dist/js/dropify.min.js"></script>
+<script src="{{asset('admin-asset')}}/assets/node_modules/summernote/dist/summernote-bs4.min.js"></script>
 <script>
     $(document).ready(function () {
         // Basic
@@ -122,5 +123,15 @@
         });
         $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary me-1');
     });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote({
+            height: 200
+        });
+    });
 
 </script>
+

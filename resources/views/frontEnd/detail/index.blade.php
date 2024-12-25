@@ -110,7 +110,7 @@
                                 <div class="row align-items-end">
                                     <div class="col-lg-4 col-md-4 col-12">
                                         <div class="button cart-button">
-                                            <a href="{{route('/cart/show')}}"><button class="btn px-3" style="width: 100%;">Add to Cart</button></a>
+                                            <a href="{{route('cart.show')}}"><button class="btn px-3" style="width: 100%;">Add to Cart</button></a>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-12">
