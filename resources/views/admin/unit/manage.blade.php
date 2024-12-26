@@ -1,10 +1,11 @@
 @extends('admin.master')
 
 @section('title')
-    Manage Sub-Category
+    Manage Unit
 @endsection
 
 @section('body')
+
     <div class="row mt-3">
         <div class="col-lg-12">
             <div class="card">
@@ -13,56 +14,48 @@
                     <h6 class="card-subtitle">Data table example</h6>
                     <div class="table-responsive m-t-40">
                         <table id="myTable" class="table table-striped table-border table-hover text-center">
-
                             <thead>
                             <tr>
                                 <th>Sl No</th>
                                 <th>Date</th>
-                                <th>Category Name</th>
-                                <th>Sub-Category Name</th>
-                                <th>Sub-Category Description</th>
-                                <th>Sub-Category Image</th>
+                                <th>Unit Name</th>
+                                <th>Unit Code</th>
+                                <th>Unit Description</th>
                                 <th>Publication Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
-
                             <tbody>
                             @php $i=1; @endphp
-                            @foreach($subcategories as $subcategory)
+                            @foreach($units as $unit)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{$subcategory->created_at}}</td>
-                                    <td>{{$subcategory->category_id}}</td>
-                                    <td>{{$subcategory->name}}</td>
-                                    <td style="text-align: justify; width: 400px">{{$subcategory->description}}</td>
+                                    <td>{{$unit->created_at}}</td>
+                                    <td>{{$unit->name}}</td>
+                                    <td>{{$unit->code}}</td>
+                                    <td style="text-align: justify; width: 400px">{{$unit->description}}</td>
+                                    <td>{{$unit->status==1? 'Published':'Unpublished'}}</td>
                                     <td>
-                                        <img src="{{asset($subcategory->image)}}" style="height: 60px; width: 60px"
-                                             alt="{{$subcategory->name}}">
-                                    </td>
-                                    <td>{{$subcategory->status==1? 'Published':'Unpublished'}}</td>
-                                    <td>
-                                        <a href="{{route('subcategory.edit', ['id'=>$subcategory->id])}}"
+                                        <a href="{{route('unit.edit', ['id'=>$unit->id])}}"
                                            class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        @if($subcategory->status==1)
-                                            <a href="{{route('subcategory.status', ['id'=>$subcategory->id])}}"
+                                        @if($unit->status==1)
+                                            <a href="{{route('unit.status', ['id'=>$unit->id])}}"
                                                class="btn btn-warning btn-sm">
                                                 <i class="fa-solid fa-eye-slash"></i></a>
                                         @else
-                                            <a href="{{route('subcategory.status', ['id'=>$subcategory->id])}}"
+                                            <a href="{{route('unit.status', ['id'=>$unit->id])}}"
                                                class="btn btn-success btn-sm">
                                                 <i class="fa-solid fa-eye"></i></a>
                                         @endif
 
-                                        <form action="{{route('subcategory.delete')}}" method="post"
-                                              style="display: inline;">
+                                        <form action="{{route('unit.delete')}}" method="post" style="display: inline;">
                                             @csrf
-                                            <input type="hidden" name="id" value="{{$subcategory->id}}">
+                                            <input type="hidden" name="id" value="{{$unit->id}}">
                                             <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Delete This Sub-Category? Action Cannot be Undone!')">
+                                                    onclick="return confirm('Delete This Unit? Action Cannot be Undone!')">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -70,7 +63,6 @@
                                 </tr>
                             @endforeach
                             </tbody>
-
                         </table>
                     </div>
                 </div>

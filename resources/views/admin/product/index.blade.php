@@ -15,13 +15,14 @@
                     <form class="form-horizontal p-t-20" action="{{route('product.new')}}" method="post"
                           enctype="multipart/form-data">
                         @csrf
+
                         <div class="form-group row">
                             <label for="exampleInputuname3" class="col-sm-3 control-label">
                                 Category Name
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="category_id">
+                                <select class="form-control" name="category_id" id="categoryId">
                                     <option value="" disabled selected> --Select Category--</option>
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
@@ -29,13 +30,14 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="" class="col-sm-3 control-label">
                                 Sub Category Name
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9">
-                                <select class="form-control" name="sub_category_id">
+                                <select class="form-control" name="sub_category_id" id="subCategoryId">
                                     <option value="" disabled selected> --Select Sub Category--</option>
                                     @foreach($sub_categories as $sub_category)
                                         <option value="{{$sub_category->id}}">{{$sub_category->name}}</option>
@@ -43,6 +45,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="" class="col-sm-3 control-label">
                                 Brand Name
@@ -57,6 +60,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="" class="col-sm-3 control-label">
                                 Unit Name
@@ -71,6 +75,7 @@
                                 </select>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="" class="col-sm-3 control-label">
                                 Product Name
@@ -82,6 +87,7 @@
                                        name="name">
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="" class="col-sm-3 control-label">
                                 Product Code
@@ -93,6 +99,7 @@
                                        name="code">
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="" class="col-sm-3 control-label">
                                 Product Model
@@ -103,6 +110,7 @@
                                        name="model">
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="" class="col-sm-3 control-label">
                                 Product Stock Amount
@@ -114,6 +122,7 @@
                                        name="stock_amount">
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="" class="col-sm-3 control-label">
                                 Product Price
@@ -129,6 +138,7 @@
 
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="exampleInputEmail3" class="col-sm-3 control-label">
                                 Short Description
@@ -139,6 +149,7 @@
                                       placeholder="short description"></textarea>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="exampleInputEmail3" class="col-sm-3 control-label">
                                 Long Description
@@ -148,6 +159,7 @@
                                       placeholder="long description"></textarea>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="form-label col-sm-3 control-label" for="web">Feature Image
                                 <span class="text-danger">*</span>
@@ -156,12 +168,15 @@
                                 <input type="file" id="input-file-now" class="dropify" name="image"/>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="form-label col-sm-3 control-label" for="web">Other Image</label>
                             <div class="col-sm-9">
-                                <input type="file" id="input-file-now" class="dropify" name="other_image"/>
+                                <input type="file" id="input-file-now" class="dropify" multiple name="other_image[]"
+                                       accept="image/*"/>
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="inputPassword4" class="col-sm-3 control-label">Publication Status</label>
                             <div class="col-sm-9">
@@ -169,6 +184,7 @@
                                 <label class=""><input type="radio" name="status" value="2">Unpublished</label>
                             </div>
                         </div>
+
                         <div class="form-group row m-b-0">
                             <div class="offset-sm-3 col-sm-9">
                                 <button type="submit" class="btn btn-success waves-effect waves-light text-white">Create
@@ -176,6 +192,7 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

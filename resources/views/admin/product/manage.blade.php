@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Data Table</h4>
+                    <h4 class="card-title">All Product Information</h4>
                     <h6 class="card-subtitle">Data table example</h6>
                     <div class="table-responsive m-t-40">
                         <table id="myTable" class="table table-striped table-border table-hover text-center">
@@ -19,9 +19,10 @@
                                 <th>Sl No</th>
                                 <th>Date</th>
                                 <th>Product Name</th>
-                                <th>Product Description</th>
-                                <th>Product Image</th>
-                                <th>Publication Status</th>
+                                <th>Product Code</th>
+                                <th>Stock Amount</th>
+                                <th>Featured Image</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -32,13 +33,19 @@
                                     <td>{{$i++}}</td>
                                     <td>{{$product->created_at}}</td>
                                     <td>{{$product->name}}</td>
-                                    <td style="text-align: justify; width: 500px">{{$product->description}}</td>
+                                    <td>{{$product->code}}</td>
+                                    <td>{{$product->stock_amount}}</td>
                                     <td>
                                         <img src="{{asset($product->image)}}" style="height: 60px; width: 60px"
                                              alt="{{$product->name}}">
                                     </td>
                                     <td>{{$product->status==1? 'Published':'Unpublished'}}</td>
                                     <td>
+                                        <a href="{{route('product.detail', ['id'=>$product->id])}}"
+                                           class="btn btn-info btn-sm">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </a>
+
                                         <a href="{{route('product.edit', ['id'=>$product->id])}}"
                                            class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i>
@@ -47,14 +54,15 @@
                                         @if($product->status==1)
                                             <a href="{{route('product.status', ['id'=>$product->id])}}"
                                                class="btn btn-warning btn-sm">
-                                                <i class="fa fa-lock"></i></a>
+                                                <i class="fa-solid fa-eye-slash"></i></a>
                                         @else
                                             <a href="{{route('product.status', ['id'=>$product->id])}}"
                                                class="btn btn-success btn-sm">
-                                                <i class="fa fa-globe"></i></a>
+                                                <i class="fa-solid fa-eye"></i></a>
                                         @endif
 
-                                        <form action="{{route('product.delete')}}" method="post" style="display: inline;">
+                                        <form action="{{route('product.delete')}}" method="post"
+                                              style="display: inline;">
                                             @csrf
                                             <input type="hidden" name="id" value="{{$product->id}}">
                                             <button type="submit" class="btn btn-danger btn-sm"

@@ -47,11 +47,11 @@
                                         @if($category->status==1)
                                             <a href="{{route('category.status', ['id'=>$category->id])}}"
                                                class="btn btn-warning btn-sm">
-                                                <i class="fa fa-lock"></i></a>
+                                                <i class="fa-solid fa-eye-slash"></i></a>
                                         @else
                                             <a href="{{route('category.status', ['id'=>$category->id])}}"
                                                class="btn btn-success btn-sm">
-                                                <i class="fa fa-globe"></i></a>
+                                                <i class="fa-solid fa-eye"></i></a>
                                         @endif
 
                                         <form action="{{route('category.delete')}}" method="post" style="display: inline;">

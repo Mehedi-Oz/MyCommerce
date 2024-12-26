@@ -125,7 +125,7 @@
     });
 </script>
 
-
+//SummerNote
 <script>
     $(document).ready(function () {
         $('#summernote').summernote({
@@ -135,3 +135,27 @@
 
 </script>
 
+//Get_SubCategory_By_CategoryID
+<script>
+    $(function () {
+        $(document).on('change', '#categoryId', function () {
+            var categoryId = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '{{route('product.get-subcategory-by-category')}}',
+                data: {id: categoryId},
+                dataType: 'JSON',
+                success: function (response) {
+                    var subCategory = $('#subCategoryId'); // Correct variable usage
+                    subCategory.empty(); // Correctly use subCategory instead of subCategoryId
+                    var option = '';
+                    option += '<option value="" disabled selected> --Select Sub Category--</option>';
+                    $.each(response, function (key, value) {
+                        option += '<option value="' + value.id + '"> ' + value.name + ' </option>'; // Fixed invalid attributes
+                    });
+                    subCategory.append(option); // Correctly use subCategory instead of subCategoryId
+                }
+            });
+        });
+    });
+</script>

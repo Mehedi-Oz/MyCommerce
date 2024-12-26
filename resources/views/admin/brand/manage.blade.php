@@ -47,11 +47,11 @@
                                         @if($brand->status==1)
                                             <a href="{{route('brand.status', ['id'=>$brand->id])}}"
                                                class="btn btn-warning btn-sm">
-                                                <i class="fa fa-lock"></i></a>
+                                                <i class="fa-solid fa-eye-slash"></i></a>
                                         @else
                                             <a href="{{route('brand.status', ['id'=>$brand->id])}}"
                                                class="btn btn-success btn-sm">
-                                                <i class="fa fa-globe"></i></a>
+                                                <i class="fa-solid fa-eye"></i></a>
                                         @endif
 
                                         <form action="{{route('brand.delete')}}" method="post" style="display: inline;">
