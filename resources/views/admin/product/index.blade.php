@@ -165,7 +165,7 @@
                                 <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9">
-                                <input type="file" id="input-file-now" class="dropify" name="image"/>
+                                <input type="file" id="input-file-now" class="dropify" name="image" accept="image/*"/>
                             </div>
                         </div>
 

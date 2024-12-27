@@ -87,6 +87,7 @@ class ProductController extends Controller
     {
 //        return $request;
         Product::deleteProduct($request);
-        return back()->with('message', 'Product deleted successfully!!');
+        OtherImage::deleteOtherImages($request);
+        return redirect('/product/manage')->with('message', 'Product deleted successfully!!');
     }
 }

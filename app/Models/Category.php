@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\SubCategory;
 
 class Category extends Model
 {
@@ -68,5 +69,10 @@ class Category extends Model
             }
         }
         self::$category->delete();
+    }
+
+    public function subCategories()
+    {
+        return $this->hasMany(Subcategory::class);
     }
 }

@@ -14,66 +14,66 @@
                     <div class="table-responsive m-t-40">
                         <table class="table table-striped border table-hover">
                             <tr>
-                                <th>Product Id</th>
+                                <th>Product Id: </th>
                                 <td>{{$product->id}}</td>
                             </tr>
                             <tr>
-                                <th>Product Name</th>
+                                <th>Product Name: </th>
                                 <td>{{$product->name}}</td>
                             </tr>
                             <tr>
-                                <th>Product Code</th>
+                                <th>Product Code: </th>
                                 <td>{{$product->code}}</td>
                             </tr>
                             <tr>
-                                <th>Product Model</th>
+                                <th>Product Model: </th>
                                 <td>{{$product->model}}</td>
                             </tr>
                             <tr>
-                                <th>Product Category</th>
+                                <th>Product Category: </th>
                                 <td>{{$product->category->name}}</td>
                             </tr>
                             <tr>
-                                <th>Product Sub Category</th>
+                                <th>Product Sub Category: </th>
                                 <td>{{$product->subCategory->name}}</td>
                             </tr>
                             <tr>
-                                <th>Product Brand</th>
+                                <th>Product Brand: </th>
                                 <td>{{$product->brand->name}}</td>
                             </tr>
                             <tr>
-                                <th>Product Unit</th>
+                                <th>Product Unit: </th>
                                 <td>{{$product->unit->name}}</td>
                             </tr>
                             <tr>
-                                <th>Product Stock Amount</th>
+                                <th>Product Stock Amount: </th>
                                 <td>{{$product->stock_amount}}</td>
                             </tr>
                             <tr>
-                                <th>Product Regular Price</th>
-                                <td>{{$product->regular_price}}</td>
+                                <th>Product Regular Price: </th>
+                                <td>{{$product->regular_price}} Tk</td>
                             </tr>
                             <tr>
-                                <th>Product Selling Price</th>
-                                <td>{{$product->selling_price}}</td>
+                                <th>Product Selling Price: </th>
+                                <td>{{$product->selling_price}} Tk</td>
                             </tr>
                             <tr>
-                                <th>Product Short Description</th>
+                                <th>Product Short Description: </th>
                                 <td>{{$product->short_description}}</td>
                             </tr>
                             <tr>
-                                <th>Product Long Description</th>
+                                <th>Product Long Description: </th>
                                 <td>{{$product->long_description}}</td>
                             </tr>
                             <tr>
-                                <th>Product Featured Image</th>
+                                <th>Product Featured Image: </th>
                                 <td>
                                     <img src="{{asset($product->image)}}" style="height: 60px; width: 60px"
                                          alt="{{$product->name}}">
                                 </td>
                             </tr>
                             <tr>
-                                <th>Product Other Images</th>
+                                <th>Product Other Images: </th>
                                 <td>
                                     @foreach($product->otherImages as $otherImage)
                                         <img src="{{asset($otherImage->image)}}" style="height: 60px; width: 60px"
@@ -82,24 +82,24 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Product Hit Count</th>
+                                <th>Product Hit Count: </th>
                                 <td>{{$product->hit_count}}</td>
                             </tr>
                             <tr>
-                                <th>Product Sales Count</th>
+                                <th>Product Sales Count: </th>
                                 <td>{{$product->sales_count}}</td>
                             </tr>
                             <tr>
-                                <th>Product Featured Status</th>
+                                <th>Product Featured Status: </th>
                                 <td>{{$product->featured_status==1? 'Featured': 'Not Featured'}}</td>
                             </tr>
                             <tr>
-                                <th>Product Publication Status</th>
+                                <th>Product Publication Status: </th>
                                 <td>{{$product->status==1? 'Published': 'Unpublished'}}</td>
                             </tr>
 
                             <tr>
-                                <th>Action</th>
+                                <th>Action: </th>
                                 <td>
                                     <a href="{{route('product.edit', ['id'=>$product->id])}}"
                                        class="btn btn-primary btn-sm">

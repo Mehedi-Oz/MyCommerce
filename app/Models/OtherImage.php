@@ -38,8 +38,19 @@ class OtherImage extends Model
         self::newOtherImage($images, $id);
     }
 
-//    public static function deleteOtherImage($images, $id)
-//    {
-//
-//    }
+    public static function deleteOtherImages($request)
+    {
+        $otherImages = OtherImage::where('product_id', $request->id)->get();
+
+        if ($otherImages->isEmpty()) {
+            return;
+        }
+
+        foreach ($otherImages as $image) {
+            if ($image->image && file_exists($image->image)) {
+                unlink($image->image); // Delete the image file
+            }
+            $image->delete();
+        }
+    }
 }
