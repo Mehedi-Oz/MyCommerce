@@ -17,7 +17,10 @@ Route::get('/product-category/{id}', [MyCommerceController::class, 'category'])-
 Route::get('/product-detail/{id}', [MyCommerceController::class, 'detail'])->name('product-detail');
 
 //CartController
-Route::get('/cart/show', [CartController::class, 'index'])->name('cart.show');
+Route::post('/cart/add/{id}', [CartController::class, 'index'])->name('cart.add');
+Route::get('/cart/show', [CartController::class, 'show'])->name('cart.show');
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 
 //CheckoutController
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');

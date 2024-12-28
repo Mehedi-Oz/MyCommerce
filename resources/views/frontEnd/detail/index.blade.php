@@ -62,13 +62,12 @@
                             </h3>
                             <p class="info-text">{{$product->short_description}}</p>
 
-                            <form action="" method="post">
+                            <form action="{{route('cart.add', ['id'=>$product->id])}}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group quantity">
-                                            <input type="number" class="form-control" value="1" min="1"
-                                                   placeholder="product quantity">
+                                            <input type="number" class="form-control" name="qty" value="1" min="1" placeholder="product quantity">
                                         </div>
                                     </div>
                                 </div>
@@ -76,27 +75,23 @@
                                     <div class="row align-items-end">
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="button cart-button">
-                                                <button type="submit" class="btn px-3" style="width: 100%;">Add to
-                                                    Cart
-                                                </button>
+                                                <button type="submit" class="btn px-3" style="width: 100%;">Add to Cart</button>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="wish-button">
-                                                <button type="button" class="btn"><i class="lni lni-reload"></i> Compare
-                                                </button>
+                                                <button type="button" class="btn"><i class="lni lni-reload"></i> Compare</button>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="wish-button">
-                                                <button type="button" class="btn"><i class="lni lni-heart"></i> To
-                                                    Wishlist
-                                                </button>
+                                                <button type="button" class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
