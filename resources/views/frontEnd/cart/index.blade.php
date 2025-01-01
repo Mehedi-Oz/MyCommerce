@@ -57,12 +57,14 @@
                     </div>
                 </div>
 
+                @php($subTotal=0)
+
                 @foreach($cartItems as $cartItem)
                     <div class="cart-single-list">
                         <div class="row align-items-center">
                             <div class="col-lg-1 col-md-1 col-12">
                                 <a href=""><img
-                                        src="{{asset($cartItem->options->image)}}" alt="#"></a>
+                                            src="{{asset($cartItem->options->image)}}" alt="#"></a>
                             </div>
                             <div class="col-lg-4 col-md-3 col-12">
                                 <h5 class="product-name"><a href="">
@@ -93,11 +95,14 @@
                             <div class="col-lg-1 col-md-2 col-12">
                                 <a class="remove-item" onclick="return confirm('Remove this item?')"
                                    href="{{route('cart.remove', ['id'=>$cartItem->rowId])}}"><i
-                                        class="lni lni-close"></i></a>
+                                            class="lni lni-close"></i></a>
                             </div>
                         </div>
                     </div>
+
+                    @php($subTotal += $cartItem->price * $cartItem->qty)
                 @endforeach
+
             </div>
             <div class="row">
                 <div class="col-12">
@@ -119,10 +124,11 @@
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="right">
                                     <ul>
-                                        <li>Cart Subtotal<span>$2560.00</span></li>
-                                        <li>Shipping<span>Free</span></li>
-                                        <li>You Save<span>$29.00</span></li>
-                                        <li class="last">You Pay<span>$2531.00</span></li>
+                                        <li>Cart Subtotal<span>{{$subTotal}} Tk</span></li>
+                                        <li>Tax<span>{{$tax = round(($subTotal*15)/100)}} Tk</span></li>
+                                        <li>Shipping Cost<span>{{$shipping = 100}} Tk</span></li>
+                                        <li class="last">Tatal Payable<span>{{$totalPayable = $subTotal+$tax+$shipping}} Tk</span>
+                                        </li>
                                     </ul>
                                     <div class="button">
                                         <a href="{{route('checkout')}}" class="btn">Checkout</a>

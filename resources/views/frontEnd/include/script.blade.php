@@ -1,6 +1,9 @@
+<script src="{{asset('front-end-asset')}}/js/jquery.js"></script>
 <script src="{{asset('front-end-asset')}}/js/bootstrap.min.js"></script>
 <script src="{{asset('front-end-asset')}}/js/tiny-slider.js"></script>
 <script src="{{asset('front-end-asset')}}/js/glightbox.min.js"></script>
+<script src="{{asset('front-end-asset')}}/js/xzoom.min.js"></script>
+<script src="{{asset('front-end-asset')}}/js/setup.js"></script>
 <script src="{{asset('front-end-asset')}}/js/main.js"></script>
 <script type="text/javascript">
     //========= Hero Slider

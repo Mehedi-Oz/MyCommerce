@@ -31,19 +31,19 @@
             <div class="top-area">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-12 col-12">
-                        <div class="product-images">
-                            <main id="gallery">
-                                <div class="main-img">
-                                    <img src="{{asset($product->image)}}" id="current"
-                                         alt="#">
-                                </div>
-                                <div class="images">
-                                    @foreach($product->otherImages as $otherImage)
-                                        <img src="{{asset($otherImage->image)}}" class="img"
-                                             alt="#">
-                                    @endforeach
-                                </div>
-                            </main>
+                        <div class="xzoom-container">
+                            <img class="xzoom" id="xzoom-default" style="height: 340px; width: 600px;"
+                                 src="{{asset($product->image)}}"
+                                 xoriginal="{{asset($product->image)}}"/>
+                            <div class="xzoom-thumbs mt-2" >
+                                @foreach($product->otherImages as $otherImage)
+                                    <a href="{{asset($otherImage->image)}}">
+                                        <img class="xzoom-gallery" width="80"
+                                             src="{{asset($otherImage->image)}}"
+                                             xpreview="{{asset($otherImage->image)}}"/>
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
@@ -67,7 +67,8 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group quantity">
-                                            <input type="number" class="form-control" name="qty" value="1" min="1" placeholder="product quantity">
+                                            <input type="number" class="form-control" name="qty" value="1" min="1"
+                                                   placeholder="product quantity">
                                         </div>
                                     </div>
                                 </div>
@@ -75,17 +76,22 @@
                                     <div class="row align-items-end">
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="button cart-button">
-                                                <button type="submit" class="btn px-3" style="width: 100%;">Add to Cart</button>
+                                                <button type="submit" class="btn px-3" style="width: 100%;">Add to
+                                                    Cart
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="wish-button">
-                                                <button type="button" class="btn"><i class="lni lni-reload"></i> Compare</button>
+                                                <button type="button" class="btn"><i class="lni lni-reload"></i> Compare
+                                                </button>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-12">
                                             <div class="wish-button">
-                                                <button type="button" class="btn"><i class="lni lni-heart"></i> To Wishlist</button>
+                                                <button type="button" class="btn"><i class="lni lni-heart"></i> To
+                                                    Wishlist
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
