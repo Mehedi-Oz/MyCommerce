@@ -18817,7 +18817,7 @@
 }
 
 .skin-purple-dark .topbar .top-navbar .navbar-header .navbar-brand .dark-logo {
-    display: none
+    display: none;
 }
 
 .skin-purple-dark .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
@@ -18831,6 +18831,11 @@
 
 .skin-purple-dark .left-sidebar .user-pro-body a.link {
     color: #8d97ad
+}
+
+.topbar .container{
+    display: block !important;
+    visibility: visible !important;
 }
 
 @media (min-width: 768px) {
@@ -41691,7 +41696,7 @@ a.list-group-item {
 }
 
 .topbar .top-navbar .dropdown-toggle::after {
-    display: none
+    display: inline;
 }
 
 .topbar .top-navbar .navbar-header {
@@ -41708,7 +41713,7 @@ a.list-group-item {
 }
 
 .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
-    display: none
+    display: inline-block;
 }
 
 .topbar .top-navbar .navbar-header .navbar-brand b {

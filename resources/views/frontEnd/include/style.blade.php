@@ -8,3 +8,4 @@
 <link rel="stylesheet" href="{{asset('front-end-asset')}}/css/glightbox.min.css" />
 <link rel="stylesheet" href="{{asset('front-end-asset')}}/css/xzoom.css" />
 <link rel="stylesheet" href="{{asset('front-end-asset')}}/css/main.css"/>
+<link rel="stylesheet" href="{{asset('front-end-asset')}}/css/custom.css"/>
