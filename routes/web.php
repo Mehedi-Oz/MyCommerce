@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerOrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
+use App\Http\Controllers\AdminOrderController;
 
 //MyCommerceController
 Route::get('/', [MyCommerceController::class, 'index'])->name('home');
@@ -28,21 +29,31 @@ Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.
 //CheckoutController
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('/new-cash-order', [CheckoutController::class, 'newCashOrder'])->name('new-cash-order');
-Route::get('/complete-order', [CheckoutController::class, 'completeOrder'])->name('complete-order');
 
 //CustomerAuthController
 Route::get('/customer/login', [CustomerAuthController::class, 'index'])->name('customer.login');
 Route::post('/customer/login', [CustomerAuthController::class, 'loginCustomer'])->name('customer.login');
 Route::get('/customer/register', [CustomerAuthController::class, 'registerShow'])->name('customer.register');
 Route::post('/customer/register', [CustomerAuthController::class, 'registerCustomer'])->name('customer.register');
-Route::get('/customer/dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
-Route::get('/customer/profile', [CustomerAuthController::class, 'profile'])->name('customer.profile');
+
 Route::get('/customer/account', [CustomerAuthController::class, 'accountCustomer'])->name('customer.account');
 Route::get('/customer/changePassword', [CustomerAuthController::class, 'changePasswordCustomer'])->name('customer.changePassword');
-Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
 
 //CustomerOrderController
 Route::get('/customer/order', [CustomerOrderController::class, 'allOrder'])->name('customer.order');
+
+
+Route::middleware(['customer'])->group(function () {
+
+    //CheckoutController
+    Route::get('/complete-order', [CheckoutController::class, 'completeOrder'])->name('complete-order');
+
+    //CustomerAuthController
+    Route::get('/customer/dashboard', [CustomerAuthController::class, 'dashboard'])->name('customer.dashboard');
+    Route::get('/customer/profile', [CustomerAuthController::class, 'profile'])->name('customer.profile');
+    Route::get('/customer/logout', [CustomerAuthController::class, 'logout'])->name('customer.logout');
+
+});
 
 
 // SSLCOMMERZ Start
@@ -58,6 +69,7 @@ Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
+
 
 Route::middleware([
     'auth:sanctum',
@@ -113,4 +125,15 @@ Route::middleware([
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/product/status/{id}', [ProductController::class, 'status'])->name('product.status');
     Route::post('/product/delete', [ProductController::class, 'remove'])->name('product.delete');
+
+
+    //AdminOrderController
+    Route::get('/admin/all-order', [AdminOrderController::class, 'index'])->name('admin.all-order');
+    Route::get('/admin/order-detail/{id}', [AdminOrderController::class, 'detail'])->name('admin.order-detail');
+    Route::get('/admin/order-edit/{id}', [AdminOrderController::class, 'edit'])->name('admin.order-edit');
+    Route::post('/admin/update-order/{id}', [AdminOrderController::class, 'update'])->name('admin.update-order');
+    Route::get('/admin/order-invoice/{id}', [AdminOrderController::class, 'showInvoice'])->name('admin.order-invoice');
+    Route::get('/admin/print-invoice/{id}', [AdminOrderController::class, 'printInvoice'])->name('admin.print-invoice');
+    Route::post('/admin/order-delete', [AdminOrderController::class, 'Delete'])->name('admin.order-delete');
+
 });

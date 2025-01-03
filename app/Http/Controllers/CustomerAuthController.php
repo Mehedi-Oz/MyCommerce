@@ -41,7 +41,18 @@ class CustomerAuthController extends Controller
 
     public function registerCustomer(Request $request)
     {
-        return $request->all();
+        $request->validate([
+            'name' => 'required',
+            'mobile' => 'required|unique:customers,mobile',
+            'email' => 'required|unique:customers,email',
+            'password' => 'required',
+        ]);
+        $this->customer = Customer::newCustomer($request);
+
+        Session::put('customerId', $this->customer->id);
+        Session::put('customerName', $this->customer->name);
+
+        return redirect()->route('customer.dashboard');
     }
 
     public function dashboard()

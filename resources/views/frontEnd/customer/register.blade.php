@@ -35,30 +35,34 @@
                         </div>
                         <div class="card-body">
                             <p class="text-danger text-center">{{session('message')}}</p>
-                            <form action="" method="post">
+                            <form action="{{route('customer.register')}}" method="post">
                                 @csrf
                                 <div class="row mb-3">
                                     <label for="" class="col-md-3">Full Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="name">
+                                        <input type="text" class="form-control" name="name" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="" class="col-md-3">Email Address</label>
                                     <div class="col-md-9">
-                                        <input type="email" class="form-control" name="email">
+                                        <input type="email" class="form-control" name="email" required>
+                                        <span
+                                            class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="" class="col-md-3">Mobile</label>
                                     <div class="col-md-9">
-                                        <input type="number" class="form-control" name="mobile">
+                                        <input type="number" class="form-control" name="mobile" required>
+                                        <span
+                                            class="text-danger">{{$errors->has('mobile') ? $errors->first('mobile') : ''}}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="" class="col-md-3">Password</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="password">
+                                        <input type="password" class="form-control" name="password" required>
                                     </div>
                                 </div>
                                 <div class="row mb-3">

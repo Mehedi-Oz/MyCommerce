@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Models\Category;
 use Illuminate\Support\ServiceProvider;
 use View;
-use App\Http\Middleware\VerifyCsrfToken;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +24,5 @@ class AppServiceProvider extends ServiceProvider
         View::composer(['frontEnd.include.header'], function ($view) {
             $view->with('categories', Category::all());
         });
-        $this->app->singleton(\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class, VerifyCsrfToken::class);
     }
 }
