@@ -53,7 +53,7 @@
                                             <i class="bi bi-receipt"></i>
                                         </a>
 
-                                        <a href="{{route('admin.print-invoice', ['id'=>$order->id])}}"
+                                        <a href="{{route('admin.print-invoice', ['id'=>$order->id])}}" target="_blank"
                                            class="btn btn-info btn-sm" title="Print Order Invoice">
                                             <i class="fa-solid fa-print"></i>
                                         </a>
