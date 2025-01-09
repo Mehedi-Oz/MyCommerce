@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Session;
 use App\Models\Order;
+use Session;
+use Illuminate\Http\Request;
 
 class CustomerOrderController extends Controller
 {
-
-    private $orders;
-
-    public function allOrder()
+    private $order;
+    public function showOrders()
     {
-        $this->orders = Order::where('customer_id', Session::get('customerId'))->get();
+        $this->order = Order::where('customer_id', Session::get('customerId'))->get();
 
-//        return $this->orders;
-        return view('frontEnd.customer.allOrder', [
-            'orders' => $this->orders
+        // return $this->order;
+        return view('frontEnd.customer.allorders', [
+            'orders' => $this->order
         ]);
     }
 }

@@ -32,12 +32,8 @@
                 <div class="col-md-3">
                     <div class="card card-body">
                         <div class="list-group">
-                            <a href="{{route('customer.profile')}}" class="list-group-item list-group-item-action">Profile</a>
-                            <a href="{{route('customer.order')}}" class="list-group-item list-group-item-action">Order</a>
-                            <a href="{{route('customer.account')}}" class="list-group-item list-group-item-action disabled" aria-disabled="true">Account</a>
-                            <a href="{{route('customer.changePassword')}}" class="list-group-item list-group-item-action disabled" aria-disabled="true">Change
-                                Password</a>
-                            <a href="{{route('customer.logout')}}" class="list-group-item list-group-item-action disabled" aria-disabled="true">Logout</a>
+                            <a href="{{route('customer.orders')}}" class="list-group-item list-group-item-action">Profile</a>
+                            <a href="{{route('customer.logout')}}" class="list-group-item list-group-item-action" aria-disabled="true">Logout</a>
                         </div>
                     </div>
                 </div>

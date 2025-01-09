@@ -7,7 +7,6 @@
     </div>
 </div>
 
-
 <header class="header navbar-area">
 
     <div class="topbar">
@@ -19,7 +18,12 @@
                             <li>
                                 <div class="select-position">
                                     <select id="select4">
-                                        <option value="1" selected>৳ BDT</option>
+                                        <option value="0" selected>$ USD</option>
+                                        <option value="1">€ EURO</option>
+                                        <option value="2">$ CAD</option>
+                                        <option value="3">₹ INR</option>
+                                        <option value="4">¥ CNY</option>
+                                        <option value="5">৳ BDT</option>
                                     </select>
                                 </div>
                             </li>
@@ -27,6 +31,11 @@
                                 <div class="select-position">
                                     <select id="select5">
                                         <option value="0" selected>English</option>
+                                        <option value="1">Español</option>
+                                        <option value="2">Filipino</option>
+                                        <option value="3">Français</option>
+                                        <option value="4">العربية</option>
+                                        <option value="5">हिन्दी</option>
                                         <option value="6">বাংলা</option>
                                     </select>
                                 </div>
@@ -37,7 +46,7 @@
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-middle">
                         <ul class="useful-links">
-                            <li><a href="{{route('home')}}">Home</a></li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li><a href="about-us.html">About Us</a></li>
                             <li><a href="contact.html">Contact Us</a></li>
                         </ul>
@@ -45,27 +54,28 @@
                 </div>
                 <div class="col-lg-4 col-md-4 col-12">
                     <div class="top-end">
-                        @if(Session::get('customerId'))
+                        @if (Session::get('customerName'))
                             <div class="user">
-                                <i class="lni lni-user"></i>
-                                Hello, {{Session::get('customerName')}}
-
-                                <ul class="user-login">
-                                    <li>
-                                        <a href="{{route('customer.dashboard')}}">Dashboard</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('customer.logout')}}">Logout</a>
-                                    </li>
-                                </ul>
+                                <i class="lni lni-user ml-1">
+                                     {{Session::get('customerName')}}
+                                </i>
                             </div>
+
+                            <ul class="user-login">
+                                <li>
+                                    <a href="{{ route('customer.dashboard') }}">Dashboard</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('customer.logout') }}">Logout</a>
+                                </li>
+                            </ul>
                         @else
                             <ul class="user-login">
                                 <li>
-                                    <a href="{{route('customer.login')}}">Sign In</a>
+                                    <a href="{{ route('customer.login') }}">Sign In</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('customer.register')}}">Register</a>
+                                    <a href="{{ route('customer.register') }}">Register</a>
                                 </li>
                             </ul>
                         @endif
@@ -81,8 +91,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
 
-                    <a class="navbar-brand" href="{{route('home')}}">
-                        <img src="{{asset('front-end-asset')}}/images/logo/logo.svg" alt="Logo">
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <img src="{{ asset('front-end-asset') }}/images/logo/logo.svg" alt="Logo">
                     </a>
 
                 </div>
@@ -132,42 +142,36 @@
                             <div class="cart-items">
                                 <a href="javascript:void(0)" class="main-btn">
                                     <i class="lni lni-cart"></i>
-                                    <span class="total-items">{{count(Cart::content())}}</span>
+                                    <span class="total-items">{{ count(Cart::content()) }}</span>
                                 </a>
 
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
-                                        <span>{{count(Cart::content())}} Items</span>
-                                        <a href="{{route('cart.show')}}">View Cart</a>
+                                        <span>{{ count(Cart::content()) }} Items</span>
+                                        <a href="{{ route('cart.show') }}">View Cart</a>
                                     </div>
                                     <ul class="shopping-list">
-                                        @php($total=0)
-                                        @foreach(Cart::content() as $cartProduct)
+                                        @foreach (Cart::content() as $cartProduct)
                                             <li>
                                                 <a href="javascript:void(0)" class="remove" title="Remove this item"><i
                                                         class="lni lni-close"></i></a>
                                                 <div class="cart-img-head">
                                                     <a class="cart-img" href="product-details.html"><img
-                                                            src="{{asset($cartProduct->options->image)}}"
-                                                            alt="#" class="img-fluid"></a>
+                                                            src="{{ asset($cartProduct->options->image) }}"
+                                                            alt="#"></a>
                                                 </div>
                                                 <div class="content">
-                                                    <h4><a href="product-details.html">
-                                                            {{$cartProduct->name}}</a></h4>
-                                                    <p class="quantity">{{$cartProduct->qty}}x - <span class="amount">{{$cartProduct->price * $cartProduct->qty}} Tk</span>
-                                                    </p>
+                                                    <h4><a href="product-details.html">{{ $cartProduct->name }}</a>
+                                                    </h4>
+                                                    <p class="quantity">{{ $cartProduct->qty }}x - <span
+                                                            class="amount">{{ $cartProduct->price }} Tk</span></p>
                                                 </div>
                                             </li>
-                                            @php($total+=($cartProduct->qty*$cartProduct->price))
                                         @endforeach
                                     </ul>
                                     <div class="bottom">
-                                        <div class="total">
-                                            <span>Total</span>
-                                            <span class="total-amount">{{$total}} Tk</span>
-                                        </div>
                                         <div class="button">
-                                            <a href="{{route('checkout')}}" class="btn animate">Checkout</a>
+                                            <a href="{{ route('checkout') }}" class="btn animate">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -189,17 +193,18 @@
                     <div class="mega-category-menu">
                         <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                         <ul class="sub-category">
-                            @foreach($categories as $category)
-                                <li><a href="{{route('product-category', ['id'=>$category->id])}}">{{$category->name}}
-                                        @if(count($category->subCategories) > 0)
+                            @foreach ($categories as $category)
+                                <li><a href="{{ route('product.category', ['id' => $category->id]) }}">{{ $category->name }}
+                                        @if (count($category->subCategories) > 0)
                                             <i class="lni lni-chevron-right"></i>
                                         @endif
                                     </a>
-                                    @if(count($category->subCategories) > 0)
+                                    @if (count($category->subCategories) > 0)
                                         <ul class="inner-sub-category">
-                                            @foreach($category->subCategories as $subCategory)
+                                            @foreach ($category->subCategories as $subcategory)
                                                 <li>
-                                                    <a href="product-grids.html">{{$subCategory->name}}</a>
+                                                    <a
+                                                        href="{{ route('product.subcategory', ['id' => $subcategory->id]) }}">{{ $subcategory->name }}</a>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -212,8 +217,8 @@
 
                     <nav class="navbar navbar-expand-lg">
                         <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
                             <span class="toggler-icon"></span>
                             <span class="toggler-icon"></span>
                             <span class="toggler-icon"></span>
@@ -221,12 +226,13 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a href="{{route('home')}}" class="active" aria-label="Toggle navigation">Home</a>
+                                    <a href="{{ route('home') }}" class="active"
+                                        aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
-                                       data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent"
-                                       aria-expanded="false" aria-label="Toggle navigation">Pages</a>
+                                        data-bs-target="#submenu-1-2" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">Pages</a>
                                     <ul class="sub-menu collapse" id="submenu-1-2">
                                         <li class="nav-item"><a href="about-us.html">About Us</a></li>
                                         <li class="nav-item"><a href="faq.html">Faq</a></li>
@@ -238,22 +244,23 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
-                                       data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
-                                       aria-expanded="false" aria-label="Toggle navigation">Shop</a>
+                                        data-bs-target="#submenu-1-3" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">Shop</a>
                                     <ul class="sub-menu collapse" id="submenu-1-3">
                                         <li class="nav-item"><a href="product-grids.html">Shop Grid</a></li>
                                         <li class="nav-item"><a href="product-list.html">Shop List</a></li>
                                         <li class="nav-item"><a href="product-details.html">shop Single</a></li>
-                                        <li class="nav-item"><a href="{{route('cart.show')}}">Cart</a></li>
-                                        <li class="nav-item"><a href="checkout.html">Checkout</a></li>
+                                        <li class="nav-item"><a href="{{ route('cart.show') }}">Cart</a></li>
+                                        <li class="nav-item"><a href="{{ route('checkout') }}">Checkout</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dd-menu collapsed" href="javascript:void(0)" data-bs-toggle="collapse"
-                                       data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent"
-                                       aria-expanded="false" aria-label="Toggle navigation">Blog</a>
+                                        data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent"
+                                        aria-expanded="false" aria-label="Toggle navigation">Blog</a>
                                     <ul class="sub-menu collapse" id="submenu-1-4">
-                                        <li class="nav-item"><a href="blog-grid-sidebar.html">Blog Grid Sidebar</a>
+                                        <li class="nav-item"><a href="blog-grid-sidebar.html">Blog Grid
+                                                Sidebar</a>
                                         </li>
                                         <li class="nav-item"><a href="blog-single.html">Blog Single</a></li>
                                         <li class="nav-item"><a href="blog-single-sidebar.html">Blog Single

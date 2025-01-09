@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\OtherImage;
-use App\Models\SubCategory;
-use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Unit;
 
 class ProductController extends Controller
 {
@@ -16,78 +16,83 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('admin.product.index', [
-            'categories' => category::all(),
-            'sub_categories' => Subcategory::all(),
+        return view("admin.product.index", [
+            'categories' => Category::all(),
+            'subcategories' => SubCategory::all(),
             'brands' => Brand::all(),
-            'units' => Unit::all()
+            'units' => Unit::all(),
         ]);
     }
 
-    public function getSubcategoryByCategory()
+    public function getSubCategoryByCategory()
     {
         return response()->json(SubCategory::where('category_id', $_GET['id'])->get());
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
-//        return $request;
-        $this->product = Product::store($request);
-        OtherImage::newOtherImage($request->other_image, $this->product->id);
-        return back()->with('message', 'Product added successfully!!');
-    }
 
-    public function update(Request $request, $id)
-    {
-//        return $request;
-        Product::updateProduct($request, $id);
-        if ($request->other_image) {
-            OtherImage::updateOtherImages($request->other_image, $id);
+        $request->validate([
+            'code' => 'required|unique:products,code'
+        ]);
+
+        $this->product = Product::storeProduct($request);
+
+        // return $this->product;
+        if ($request->has('other_image') && !empty($request->other_image)) {
+            OtherImage::storeOtherImage($request->other_image, $this->product->id);
         }
-        return back()->with('message', 'Product updated successfully!!');
+
+        return back()->with("message", "New Product Added to the Database Successfully!");
     }
 
     public function manage()
     {
-        return view('admin.product.manage', [
+        return view("admin.product.manage", [
             'products' => Product::all(),
-            'otherImages' => OtherImage::all(),
         ]);
     }
 
-    public function detail($id)
+    public function details($id)
     {
-        return view('admin.product.detail', [
+        return view("admin.product.details", [
             'product' => Product::find($id),
-            'categories' => category::all(),
-            'sub_categories' => Subcategory::all(),
-            'brands' => Brand::all(),
-            'units' => Unit::all(),
         ]);
     }
 
     public function edit($id)
     {
-        return view('admin.product.edit', [
+        return view("admin.product.edit", [
             'product' => Product::find($id),
-            'categories' => category::all(),
-            'sub_categories' => Subcategory::all(),
+            'categories' => Category::all(),
+            'subcategories' => SubCategory::all(),
             'brands' => Brand::all(),
             'units' => Unit::all(),
+            'otherImages' => OtherImage::all(),
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        Product::updateProduct($request, $id);
+
+        if ($request->other_image) {
+            OtherImage::updateOtherImage($request->other_image, $id);
+        }
+
+        return back()->with("message", "Product Information Updated Successfully!");
     }
 
     public function status($id)
     {
         Product::statusProduct($id);
-        return back()->with('message', 'Status updated successfully!!');
+        return back()->with("message", "Product Status Updated Successfully!");
     }
 
-    public function remove(Request $request)
+    public function delete(Request $request)
     {
-//        return $request;
         Product::deleteProduct($request);
-        OtherImage::deleteOtherImages($request);
-        return redirect('/product/manage')->with('message', 'Product deleted successfully!!');
+        OtherImage::deleteOtherImage($request->id);
+        return back()->with("message", "Product Deleted!");
     }
 }

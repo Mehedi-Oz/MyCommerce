@@ -6,27 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Brand extends Model
 {
-    public static $brand, $image, $imageNewName, $directory, $imgUrl;
+    private static $brand, $image, $imageNewName, $directory, $imgUrl;
 
-    protected $fillable = ['name', 'description', 'image', 'status'];
-
-    public static function store($request)
+    public static function storeBrand($request)
     {
         self::$brand = new Brand();
         self::$brand->name = $request->name;
         self::$brand->description = $request->description;
         self::$brand->status = $request->status;
-        self::$brand->image = self::saveImage($request);
+
+        if ($request->hasFile('image')) {
+            self::$brand->image = self::saveImage($request);
+        } else {
+            self::$brand->image = null;
+        }
+
         self::$brand->save();
     }
 
     private static function saveImage($request)
     {
         self::$image = $request->file('image');
-        self::$imageNewName = 'Brand-' . rand() . '.' . self::$image->getClientOriginalName();
-        self::$directory = 'admin-asset/upload-images/brand/';
+        self::$imageNewName = 'Brand-' . rand() . '.' . self::$image->getClientOriginalExtension();
+        self::$directory = 'admin-asset/assets/upload-images/brand/';
         self::$image->move(self::$directory, self::$imageNewName);
-        return $imgUrl = self::$directory . self::$imageNewName;
+        return self::$imgUrl = self::$directory . self::$imageNewName;
     }
 
     public static function statusBrand($id)
@@ -41,12 +45,13 @@ class Brand extends Model
         self::$brand->save();
     }
 
-    public static function updateBrand($request)
+    public static function updateBrand($request, $id)
     {
-        self::$brand = Brand::find($request->id);
+        self::$brand = Brand::find($id);
 
         self::$brand->name = $request->name;
         self::$brand->description = $request->description;
+        self::$brand->status = $request->status;
 
         if ($request->file('image')) {
             if (self::$brand->image && file_exists(self::$brand->image)) {
@@ -54,16 +59,16 @@ class Brand extends Model
             }
             self::$brand->image = self::saveImage($request);
         }
-        self::$brand->status = $request->status;
-        self::$brand->save();
+        return self::$brand->save();
+
     }
 
     public static function deleteBrand($request)
     {
         self::$brand = Brand::find($request->id);
 
-        if (self::$brand) {
-            if (self::$brand->image && file_exists(self::$brand->image)) {
+        if (self::$brand->image) {
+            if (file_exists(self::$brand->image)) {
                 unlink(self::$brand->image);
             }
         }

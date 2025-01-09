@@ -15,7 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'sslcommerz' => VerifyCsrfToken::class,
+            // 'sslcommerz' => VerifyCsrfToken::class,
             'customer' => CustomerMiddleware::class,
         ]);
     })

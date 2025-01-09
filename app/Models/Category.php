@@ -3,31 +3,39 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\SubCategory;
 
 class Category extends Model
 {
-    public static $category, $image, $imageNewName, $directory, $imgUrl;
+    private static $category, $image, $imageNewName, $directory, $imgUrl;
 
-    protected $fillable = ['name', 'description', 'image', 'status'];
-
-    public static function store($request)
+    public static function storeCategory($request)
     {
         self::$category = new Category();
         self::$category->name = $request->name;
         self::$category->description = $request->description;
         self::$category->status = $request->status;
-        self::$category->image = self::saveImage($request);
+
+        if ($request->hasFile('image')) {
+            self::$category->image = self::saveImage($request);
+        } else {
+            self::$category->image = null;
+        }
+
         self::$category->save();
     }
 
     private static function saveImage($request)
     {
         self::$image = $request->file('image');
-        self::$imageNewName = 'Category-' . rand() . '.' . self::$image->getClientOriginalName();
-        self::$directory = 'admin-asset/upload-images/category/';
+        self::$imageNewName = 'Category-' . rand() . '.' . self::$image->getClientOriginalExtension();
+        self::$directory = 'admin-asset/assets/upload-images/category/';
         self::$image->move(self::$directory, self::$imageNewName);
-        return $imgUrl = self::$directory . self::$imageNewName;
+        return self::$imgUrl = self::$directory . self::$imageNewName;
+    }
+
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class);
     }
 
     public static function statusCategory($id)
@@ -42,12 +50,14 @@ class Category extends Model
         self::$category->save();
     }
 
-    public static function updateCategory($request)
+
+    public static function updateCategory($request, $id)
     {
-        self::$category = Category::find($request->id);
+        self::$category = Category::find($id);
 
         self::$category->name = $request->name;
         self::$category->description = $request->description;
+        self::$category->status = $request->status;
 
         if ($request->file('image')) {
             if (self::$category->image && file_exists(self::$category->image)) {
@@ -55,24 +65,20 @@ class Category extends Model
             }
             self::$category->image = self::saveImage($request);
         }
-        self::$category->status = $request->status;
-        self::$category->save();
+        return self::$category->save();
+
     }
 
     public static function deleteCategory($request)
     {
         self::$category = Category::find($request->id);
 
-        if (self::$category) {
-            if (self::$category->image && file_exists(self::$category->image)) {
+        if (self::$category->image) {
+            if (file_exists(self::$category->image)) {
                 unlink(self::$category->image);
             }
         }
         self::$category->delete();
     }
 
-    public function subCategories()
-    {
-        return $this->hasMany(Subcategory::class);
-    }
 }

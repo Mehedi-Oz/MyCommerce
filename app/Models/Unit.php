@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
 {
-    public static $unit;
+    private static $unit, $image, $imageNewName, $directory, $imgUrl;
 
-    protected $fillable = ['name', 'description', 'code', 'status'];
-
-    public static function store($request)
+    public static function storeUnit($request)
     {
         self::$unit = new Unit();
         self::$unit->name = $request->name;
@@ -32,15 +30,16 @@ class Unit extends Model
         self::$unit->save();
     }
 
-    public static function updateUnit($request)
+    public static function updateUnit($request, $id)
     {
-        self::$unit = Unit::find($request->id);
+        self::$unit = Unit::find($id);
 
         self::$unit->name = $request->name;
         self::$unit->code = $request->code;
         self::$unit->description = $request->description;
         self::$unit->status = $request->status;
-        self::$unit->save();
+        return self::$unit->save();
+
     }
 
     public static function deleteUnit($request)

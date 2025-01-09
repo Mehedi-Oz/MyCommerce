@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
-use Illuminate\Http\Request;
-use Cart;
 use Session;
-
-//use Illuminate\Support\Facades\Session;
+use Cart;
 
 class CheckoutController extends Controller
 {
     private $customer, $order, $orderDetail;
-
-
-    public function index()
+    public function checkout()
     {
         if (Session::get('customerId')) {
             $this->customer = Customer::find(Session::get('customerId'));
@@ -26,7 +22,7 @@ class CheckoutController extends Controller
         return view('frontEnd.checkout.index', ['customer' => $this->customer]);
     }
 
-    private function orderCustomerValidate($request)
+    private function validateCustomer($request)
     {
         $request->validate([
             'name' => 'required',
@@ -36,15 +32,14 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function newCashOrder(Request $request)
+    public function cashOnDelivery(Request $request)
     {
-//        return $request;
-//        return Cart::content();
 
         if (Session::get('customerId')) {
             $this->customer = Customer::find(Session::get('customerId'));
         } else {
-            $this->orderCustomerValidate($request);
+
+            $this->validateCustomer($request);
             $this->customer = Customer::newCustomer($request);
 
             Session::put('customerId', $this->customer->id);
@@ -55,11 +50,11 @@ class CheckoutController extends Controller
 
         OrderDetail::newOrderDetail($this->order->id);
 
-        return redirect('/complete-order')->with('message', 'Order placed successfully!!');
+        return redirect('/order-complete')->with('message', 'Order placed successfully!!');
     }
 
-    public function completeOrder()
+    public function orderComplete()
     {
-        return view('frontEnd.checkout.complete-order');
+        return view('frontEnd.checkout.order-complete');
     }
 }

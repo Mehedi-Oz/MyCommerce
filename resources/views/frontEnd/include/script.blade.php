@@ -1,12 +1,16 @@
-<script src="{{asset('front-end-asset')}}/js/jquery.js"></script>
-<script src="{{asset('front-end-asset')}}/js/bootstrap.min.js"></script>
-<script src="{{asset('front-end-asset')}}/js/tiny-slider.js"></script>
-<script src="{{asset('front-end-asset')}}/js/glightbox.min.js"></script>
-<script src="{{asset('front-end-asset')}}/js/xzoom.min.js"></script>
-<script src="{{asset('front-end-asset')}}/js/setup.js"></script>
-<script src="{{asset('front-end-asset')}}/js/main.js"></script>
+<script src="{{ asset('front-end-asset') }}/js/jquery.js"></script>
+<script src="{{ asset('front-end-asset') }}/js/bootstrap.min.js"></script>
+<script src="{{ asset('front-end-asset') }}/js/tiny-slider.js"></script>
+<script src="{{ asset('front-end-asset') }}/js/glightbox.min.js"></script>
+
+<!-- xzoom plugin here -->
+<script src="{{ asset('front-end-asset') }}/js/xzoom.min.js"></script>
+<!-- hammer plugin here -->
+<script src="{{ asset('front-end-asset') }}/js/setup.js"></script>
+
+<script src="{{ asset('front-end-asset') }}/js/main.js"></script>
 <script type="text/javascript">
-    //========= Hero Slider
+    //========= Hero Slider 
     tns({
         container: '.hero-slider',
         slideBy: 'page',
@@ -44,7 +48,6 @@
             }
         }
     });
-
 </script>
 <script>
     const finaleDate = new Date("February 15, 2023 00:00:00").getTime();
@@ -76,4 +79,19 @@
     }
     timer();
     setInterval(timer, 1000);
+</script>
+
+<script>
+    (function(window, document) {
+        var loader = function() {
+            var script = document.createElement("script"),
+                tag = document.getElementsByTagName("script")[0];
+            script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(
+                7);
+            tag.parentNode.insertBefore(script, tag);
+        };
+
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload",
+            loader);
+    })(window, document);
 </script>

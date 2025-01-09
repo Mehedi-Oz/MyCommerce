@@ -2,54 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.category.index');
+        return view("admin.category.index");
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        Category::store($request);
-        return back()->with('message', 'Category added successfully!!');
+        Category::storeCategory($request);
+        return back()->with("message", "New Category Added to the Database Successfully!");
     }
 
     public function manage()
     {
-        return view('admin.category.manage', [
-            'categories' => Category::all()
+        return view("admin.category.manage", [
+            "categories" => Category::all()
         ]);
     }
 
     public function edit($id)
     {
-        return view('admin.category.edit', [
-            'category' => Category::find($id)
+        return view("admin.category.edit",[
+            'category'=> Category::find($id)
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        Category::updateCategory($request, $id);
+        return back()->with("message", "Categroy Information Updated Successfully!");
     }
 
     public function status($id)
     {
+        // $category = Category::find($id);
+        // return $category->status;
         Category::statusCategory($id);
-        return back()->with('message', 'Status updated successfully!!');
+        return back()->with("message", "Categroy Status Updated Successfully!");
     }
 
-    public function update(Request $request)
+    public function delete(Request $request)
     {
-//        return $request;
-        Category::updateCategory($request);
-        return back()->with('message', 'Category updated successfully!!');
-    }
-
-    public function remove(Request $request)
-    {
-//        return $request;
         Category::deleteCategory($request);
-        return back()->with('message', 'Category deleted successfully!!');
+        return back()->with("message", "Category Deleted!");
     }
+
 
 }

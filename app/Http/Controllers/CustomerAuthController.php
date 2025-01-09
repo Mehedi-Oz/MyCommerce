@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use Illuminate\Http\Request;
 use Session;
-use Cart;
+use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class CustomerAuthController extends Controller
 {
-    private $customer;
+    private $customer, $password;
 
-    public function index()
+    public function loginCustomer()
     {
         return view('frontEnd.customer.index');
     }
 
-    public function loginCustomer(Request $request)
+    public function loginCustomerCheck(Request $request)
     {
         $this->customer = Customer::where('email', $request->email)->first();
         if ($this->customer) {
@@ -25,22 +24,23 @@ class CustomerAuthController extends Controller
                 Session::put('customerId', $this->customer->id);
                 Session::put('customerName', $this->customer->name);
 
-                return redirect()->route('customer.dashboard');
+                return redirect('/');
             } else {
-                return back()->with('message', 'Invalid Password');
+                return back()->with('message', 'Wrong Password!');
             }
         } else {
-            return back()->with('message', 'Invalid Email Address');
+            return back()->with('message', 'Invalid Email Address!');
         }
     }
 
-    public function registerShow()
+    public function registerCustomer()
     {
         return view('frontEnd.customer.register');
     }
 
-    public function registerCustomer(Request $request)
+    public function newCustomer(Request $request)
     {
+        // return $request;
         $request->validate([
             'name' => 'required',
             'mobile' => 'required|unique:customers,mobile',
@@ -52,30 +52,15 @@ class CustomerAuthController extends Controller
         Session::put('customerId', $this->customer->id);
         Session::put('customerName', $this->customer->name);
 
-        return redirect()->route('customer.dashboard');
+        return redirect('/');
     }
 
-    public function dashboard()
+    public function dashboardCustomer()
     {
         return view('frontEnd.customer.dashboard');
     }
 
-    public function profile()
-    {
-        return view('frontEnd.customer.profile');
-    }
-
-    public function accountCustomer()
-    {
-//        return view('frontEnd.customer.dashboard');
-    }
-
-    public function changePasswordCustomer()
-    {
-//        return view('frontEnd.customer.dashboard');
-    }
-
-    public function logout()
+    public function logoutCustomer(Request $request)
     {
         Session::forget('customerId');
         Session::forget('customerName');

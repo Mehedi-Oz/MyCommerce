@@ -6,26 +6,37 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubCategory extends Model
 {
-    public static $subcategory, $image, $imageNewName, $directory, $imgUrl;
+    private static $subcategory, $image, $imageNewName, $directory, $imgUrl;
 
-    public static function store($request)
+    public static function storeSubCategory($request)
     {
         self::$subcategory = new SubCategory();
-        self::$subcategory->category_id = $request->category_id;
         self::$subcategory->name = $request->name;
+        self::$subcategory->category_id = $request->category_id;
         self::$subcategory->description = $request->description;
         self::$subcategory->status = $request->status;
-        self::$subcategory->image = self::saveImage($request);
+
+        if ($request->hasFile('image')) {
+            self::$subcategory->image = self::saveImage($request);
+        } else {
+            self::$subcategory->image = null;
+        }
+
         self::$subcategory->save();
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     private static function saveImage($request)
     {
         self::$image = $request->file('image');
-        self::$imageNewName = 'SubCategory-' . rand() . '.' . self::$image->getClientOriginalName();
-        self::$directory = 'admin-asset/upload-images/sub-category/';
+        self::$imageNewName = 'SubCategory-' . rand() . '.' . self::$image->getClientOriginalExtension();
+        self::$directory = 'admin-asset/assets/upload-images/sub-category/';
         self::$image->move(self::$directory, self::$imageNewName);
-        return $imgUrl = self::$directory . self::$imageNewName;
+        return self::$imgUrl = self::$directory . self::$imageNewName;
     }
 
     public static function statusSubCategory($id)
@@ -40,13 +51,15 @@ class SubCategory extends Model
         self::$subcategory->save();
     }
 
-    public static function updateSubCategory($request)
-    {
-        self::$subcategory = SubCategory::find($request->id);
 
-        self::$subcategory->category_id = $request->category_id;
+    public static function updateSubCategory($request, $id)
+    {
+        self::$subcategory = SubCategory::find($id);
+
         self::$subcategory->name = $request->name;
+        self::$subcategory->category_id = $request->category_id;
         self::$subcategory->description = $request->description;
+        self::$subcategory->status = $request->status;
 
         if ($request->file('image')) {
             if (self::$subcategory->image && file_exists(self::$subcategory->image)) {
@@ -54,16 +67,16 @@ class SubCategory extends Model
             }
             self::$subcategory->image = self::saveImage($request);
         }
-        self::$subcategory->status = $request->status;
-        self::$subcategory->save();
+        return self::$subcategory->save();
+
     }
 
     public static function deleteSubCategory($request)
     {
         self::$subcategory = SubCategory::find($request->id);
 
-        if (self::$subcategory) {
-            if (self::$subcategory->image && file_exists(self::$subcategory->image)) {
+        if (self::$subcategory->image) {
+            if (file_exists(self::$subcategory->image)) {
                 unlink(self::$subcategory->image);
             }
         }

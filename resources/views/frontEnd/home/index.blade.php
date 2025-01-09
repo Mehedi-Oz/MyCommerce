@@ -1,11 +1,10 @@
 @extends('frontEnd.master')
 
 @section('title')
-    Online Super Store
+    Home
 @endsection
 
 @section('body')
-
     <section class="hero-area">
         <div class="container">
             <div class="row">
@@ -15,7 +14,7 @@
                         <div class="hero-slider">
 
                             <div class="single-slider"
-                                 style="background-image: url({{asset('front-end-asset')}}/images/hero/slider-bg1.jpg);">
+                                style="background-image: url({{ asset('front-end-asset') }}/images/hero/slider-bg1.jpg);">
                                 <div class="content">
                                     <h2><span>No restocking fee ($35 savings)</span>
                                         M75 Sport Watch
@@ -31,7 +30,7 @@
 
 
                             <div class="single-slider"
-                                 style="background-image: url({{asset('front-end-asset')}}/images/hero/slider-bg2.jpg);">
+                                style="background-image: url({{ asset('front-end-asset') }}/images/hero/slider-bg2.jpg);">
                                 <div class="content">
                                     <h2><span>Big Sale Offer</span>
                                         Get the Best Deal on CCTV Camera
@@ -54,7 +53,7 @@
                         <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
 
                             <div class="hero-small-banner"
-                                 style="background-image: url('{{asset('front-end-asset')}}/images/hero/slider-bnr.jpg');">
+                                style="background-image: url('{{ asset('front-end-asset') }}/images/hero/slider-bnr.jpg');">
                                 <div class="content">
                                     <h2>
                                         <span>New line required</span>
@@ -109,8 +108,8 @@
                             <li><a href="product-grids.html">View All</a></li>
                         </ul>
                         <div class="images">
-                            <img src="{{asset('front-end-asset')}}/images/featured-categories/fetured-item-1.png"
-                                 alt="#">
+                            <img src="{{ asset('front-end-asset') }}/images/featured-categories/fetured-item-1.png"
+                                alt="#">
                         </div>
                     </div>
 
@@ -127,8 +126,8 @@
                             <li><a href="product-grids.html">View All</a></li>
                         </ul>
                         <div class="images">
-                            <img src="{{asset('front-end-asset')}}/images/featured-categories/fetured-item-2.png"
-                                 alt="#">
+                            <img src="{{ asset('front-end-asset') }}/images/featured-categories/fetured-item-2.png"
+                                alt="#">
                         </div>
                     </div>
 
@@ -145,8 +144,8 @@
                             <li><a href="product-grids.html">View All</a></li>
                         </ul>
                         <div class="images">
-                            <img src="{{asset('front-end-asset')}}/images/featured-categories/fetured-item-3.png"
-                                 alt="#">
+                            <img src="{{ asset('front-end-asset') }}/images/featured-categories/fetured-item-3.png"
+                                alt="#">
                         </div>
                     </div>
 
@@ -163,8 +162,8 @@
                             <li><a href="product-grids.html">View All</a></li>
                         </ul>
                         <div class="images">
-                            <img src="{{asset('front-end-asset')}}/images/featured-categories/fetured-item-4.png"
-                                 alt="#">
+                            <img src="{{ asset('front-end-asset') }}/images/featured-categories/fetured-item-4.png"
+                                alt="#">
                         </div>
                     </div>
 
@@ -181,8 +180,8 @@
                             <li><a href="product-grids.html">View All</a></li>
                         </ul>
                         <div class="images">
-                            <img src="{{asset('front-end-asset')}}/images/featured-categories/fetured-item-5.png"
-                                 alt="#">
+                            <img src="{{ asset('front-end-asset') }}/images/featured-categories/fetured-item-5.png"
+                                alt="#">
                         </div>
                     </div>
 
@@ -199,8 +198,8 @@
                             <li><a href="product-grids.html">View All</a></li>
                         </ul>
                         <div class="images">
-                            <img src="{{asset('front-end-asset')}}/images/featured-categories/fetured-item-6.png"
-                                 alt="#">
+                            <img src="{{ asset('front-end-asset') }}/images/featured-categories/fetured-item-6.png"
+                                alt="#">
                         </div>
                     </div>
 
@@ -222,35 +221,29 @@
                 </div>
             </div>
             <div class="row">
-                @foreach($products as $product)
+                @foreach ($products as $product)
                     <div class="col-lg-3 col-md-6 col-12">
-
                         <div class="single-product">
                             <div class="product-image">
-                                <img src="{{asset($product->image)}}" alt="{{$product->name}}" style="height: 300px; width: 350px">
+                                <img src="{{ asset($product->image) }}" alt="#">
                                 <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
+                                    <a href="{{ route('cart.show') }}" class="btn"><i class="lni lni-cart"></i> Add
+                                        to
+                                        Cart</a>
                                 </div>
                             </div>
                             <div class="product-info">
-                                <span class="category">{{$product->category->name}}</span>
+                                <span class="category">{{ $product->category->name }}</span>
                                 <h4 class="title">
-                                    <a href="{{route('product-detail', ['id'=>$product->id])}}">{{$product->name}}</a>
+                                    <a
+                                        href="{{ route('product.detail', ['id' => $product->id]) }}">{{ $product->name }}</a>
                                 </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star"></i></li>
-                                    <li><span>4.0 Review(s)</span></li>
-                                </ul>
+
                                 <div class="price">
-                                    <span>{{$product->selling_price}} Tk</span>
+                                    <span>{{ $product->selling_price }} Taka</span>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 @endforeach
             </div>
@@ -263,7 +256,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="single-banner"
-                         style="background-image:url('{{asset('front-end-asset')}}/images/banner/banner-1-bg.jpg')">
+                        style="background-image:url('{{ asset('front-end-asset') }}/images/banner/banner-1-bg.jpg')">
                         <div class="content">
                             <h2>Smart Watch 2.0</h2>
                             <p>Space Gray Aluminum Case with <br>Black/Volt Real Sport Band </p>
@@ -275,7 +268,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="single-banner custom-responsive-margin"
-                         style="background-image:url('{{asset('front-end-asset')}}/images/banner/banner-2-bg.jpg')">
+                        style="background-image:url('{{ asset('front-end-asset') }}/images/banner/banner-2-bg.jpg')">
                         <div class="content">
                             <h2>Smart Headphone</h2>
                             <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
@@ -309,9 +302,11 @@
 
                             <div class="single-product">
                                 <div class="product-image">
-                                    <img src="{{asset('front-end-asset')}}/images/products/product-3.jpg" alt="#">
+                                    <img src="{{ asset('front-end-asset') }}/images/products/product-3.jpg"
+                                        alt="#">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
+                                        <a href="{{ route('cart.show') }}" class="btn"><i class="lni lni-cart"></i>
+                                            Add to
                                             Cart</a>
                                     </div>
                                 </div>
@@ -339,9 +334,11 @@
 
                             <div class="single-product">
                                 <div class="product-image">
-                                    <img src="{{asset('front-end-asset')}}/images/products/product-8.jpg" alt="#">
+                                    <img src="{{ asset('front-end-asset') }}/images/products/product-8.jpg"
+                                        alt="#">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
+                                        <a href="{{ route('cart.show') }}" class="btn"><i class="lni lni-cart"></i>
+                                            Add to
                                             Cart</a>
                                     </div>
                                 </div>
@@ -369,9 +366,11 @@
 
                             <div class="single-product">
                                 <div class="product-image">
-                                    <img src="{{asset('front-end-asset')}}/images/products/product-6.jpg" alt="#">
+                                    <img src="{{ asset('front-end-asset') }}/images/products/product-6.jpg"
+                                        alt="#">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
+                                        <a href="{{ route('cart.show') }}" class="btn"><i class="lni lni-cart"></i>
+                                            Add to
                                             Cart</a>
                                     </div>
                                 </div>
@@ -398,7 +397,7 @@
                     </div>
 
                     <div class="single-banner right"
-                         style="background-image:url('{{asset('front-end-asset')}}/images/banner/banner-3-bg.jpg');margin-top: 30px;">
+                        style="background-image:url('{{ asset('front-end-asset') }}/images/banner/banner-3-bg.jpg');margin-top: 30px;">
                         <div class="content">
                             <h2>Samsung Notebook 9 </h2>
                             <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
@@ -416,7 +415,7 @@
                 <div class="col-lg-4 col-md-12 col-12">
                     <div class="offer-content">
                         <div class="image">
-                            <img src="{{asset('front-end-asset')}}/images/offer/offer-image.jpg" alt="#">
+                            <img src="{{ asset('front-end-asset') }}/images/offer/offer-image.jpg" alt="#">
                             <span class="sale-tag">-50%</span>
                         </div>
                         <div class="text">
@@ -473,7 +472,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/01.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/01.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -487,7 +487,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/02.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/02.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -501,7 +502,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/03.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/03.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -518,7 +520,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/04.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/04.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -532,7 +535,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/05.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/05.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -546,7 +550,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/06.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/06.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -563,7 +568,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/07.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/07.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -577,7 +583,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/08.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/08.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -591,7 +598,8 @@
                     <div class="single-list">
                         <div class="list-image">
                             <a href="product-grids.html"><img
-                                        src="{{asset('front-end-asset')}}/images/home-product-list/09.jpg" alt="#"></a>
+                                    src="{{ asset('front-end-asset') }}/images/home-product-list/09.jpg"
+                                    alt="#"></a>
                         </div>
                         <div class="list-info">
                             <h3>
@@ -617,28 +625,28 @@
             <div class="brands-logo-wrapper">
                 <div class="brands-logo-carousel d-flex align-items-center justify-content-between">
                     <div class="brand-logo">
-                        <img src="{{asset('front-end-asset')}}/images/brands/01.png" alt="#">
+                        <img src="{{ asset('front-end-asset') }}/images/brands/01.png" alt="#">
                     </div>
                     <div class="brand-logo">
-                        <img src="{{asset('front-end-asset')}}/images/brands/02.png" alt="#">
+                        <img src="{{ asset('front-end-asset') }}/images/brands/02.png" alt="#">
                     </div>
                     <div class="brand-logo">
-                        <img src="{{asset('front-end-asset')}}/images/brands/03.png" alt="#">
+                        <img src="{{ asset('front-end-asset') }}/images/brands/03.png" alt="#">
                     </div>
                     <div class="brand-logo">
-                        <img src="{{asset('front-end-asset')}}/images/brands/04.png" alt="#">
+                        <img src="{{ asset('front-end-asset') }}/images/brands/04.png" alt="#">
                     </div>
                     <div class="brand-logo">
-                        <img src="{{asset('front-end-asset')}}/images/brands/05.png" alt="#">
+                        <img src="{{ asset('front-end-asset') }}/images/brands/05.png" alt="#">
                     </div>
                     <div class="brand-logo">
-                        <img src="{{asset('front-end-asset')}}/images/brands/06.png" alt="#">
+                        <img src="{{ asset('front-end-asset') }}/images/brands/06.png" alt="#">
                     </div>
                     <div class="brand-logo">
-                        <img src="{{asset('front-end-asset')}}/images/brands/03.png" alt="#">
+                        <img src="{{ asset('front-end-asset') }}/images/brands/03.png" alt="#">
                     </div>
                     <div class="brand-logo">
-                        <img src="{{asset('front-end-asset')}}/images/brands/04.png" alt="#">
+                        <img src="{{ asset('front-end-asset') }}/images/brands/04.png" alt="#">
                     </div>
                 </div>
             </div>
@@ -663,7 +671,7 @@
                     <div class="single-blog">
                         <div class="blog-img">
                             <a href="blog-single-sidebar.html">
-                                <img src="{{asset('front-end-asset')}}/images/blog/blog-1.jpg" alt="#">
+                                <img src="{{ asset('front-end-asset') }}/images/blog/blog-1.jpg" alt="#">
                             </a>
                         </div>
                         <div class="blog-content">
@@ -685,7 +693,7 @@
                     <div class="single-blog">
                         <div class="blog-img">
                             <a href="blog-single-sidebar.html">
-                                <img src="{{asset('front-end-asset')}}/images/blog/blog-2.jpg" alt="#">
+                                <img src="{{ asset('front-end-asset') }}/images/blog/blog-2.jpg" alt="#">
                             </a>
                         </div>
                         <div class="blog-content">
@@ -707,7 +715,7 @@
                     <div class="single-blog">
                         <div class="blog-img">
                             <a href="blog-single-sidebar.html">
-                                <img src="{{asset('front-end-asset')}}/images/blog/blog-3.jpg" alt="#">
+                                <img src="{{ asset('front-end-asset') }}/images/blog/blog-3.jpg" alt="#">
                             </a>
                         </div>
                         <div class="blog-content">
@@ -776,5 +784,4 @@
             </ul>
         </div>
     </section>
-
 @endsection

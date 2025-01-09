@@ -5,35 +5,44 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Cart;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public $product;
+    private $product;
 
-    public function index(Request $request, $id)
+    public function index()
     {
-        $this->product = Product::find($id);
-        Cart::add($this->product->id, $this->product->name, $request->qty, $this->product->selling_price, [
-            'image' => $this->product->image,
-            'category' => $this->product->category->name,
-            'brand' => $this->product->brand->name
+
+        // return Cart::content();
+        return view('frontEnd.cart.index', [
+            'cartProducts' => Cart::content()
         ]);
-        return redirect('/cart/show');
     }
 
-    public function show()
+
+    public function add(Request $request, $id)
     {
-        return view('frontEnd.cart.index', [
-            'cartItems' => Cart::content()
-        ]);
+        $this->product = Product::find($id);
+
+        Cart::add(
+            $this->product->id,
+            $this->product->name,
+            $request->qty,
+            $this->product->selling_price,
+            [
+                'image' => $this->product->image,
+                'category' => $this->product->category->name,
+                'brand' => $this->product->brand->name,
+            ]
+        );
+        return redirect('/cart/show');
     }
 
     public function remove($id)
     {
         $rowId = $id;
         Cart::remove($rowId);
-        return redirect('/cart/show')->with('message', 'Item has been removed!');
+        return redirect('/cart/show');
     }
 
     public function update(Request $request, $id)
@@ -42,4 +51,5 @@ class CartController extends Controller
         Cart::update($rowId, $request->qty);
         return redirect('/cart/show')->with('message', 'Item has been updated!');
     }
+
 }

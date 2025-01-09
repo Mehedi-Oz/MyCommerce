@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     private static $customer;
-
     public static function newCustomer($request)
     {
         self::$customer = new Customer();
@@ -16,7 +15,7 @@ class Customer extends Model
         self::$customer->mobile = $request->mobile;
 
         if ($request->password) {
-            self::$customer->password = $request->password;
+            self::$customer->password = bcrypt($request->password);
         } else {
             self::$customer->password = bcrypt($request->mobile);
         }

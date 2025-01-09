@@ -1,3 +1,3 @@
 <footer class="footer text-center">
-    © 2024 Hasan
-</footer><?php
+  © 2025 Hasan
+</footer>

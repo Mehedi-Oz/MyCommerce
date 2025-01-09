@@ -5,15 +5,15 @@
 @endsection
 
 @section('body')
-
     <div class="row mt-3">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Add A Product Unit</h4> <span
-                        class="text-success"> {{session('message')}} </span>
+                    <h4 class="card-title">Add A Product Unit</h4>
+                    <p class="text-success">{{ session('message') }}</p>
 
-                    <form class="form-horizontal p-t-20" action="{{route('unit.new')}}" method="post">
+                    <form class="form-horizontal p-t-20" action="{{ route('unit.new') }}" method="post"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="exampleInputuname3" class="col-sm-3 control-label">
@@ -22,8 +22,7 @@
                             </label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="exampleInputuname3"
-                                       placeholder="unit name"
-                                       name="name">
+                                    placeholder="unit name" name="name">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -33,17 +32,16 @@
                             </label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="exampleInputuname3"
-                                       placeholder="unit code"
-                                       name="code">
+                                    placeholder="unit code" name="code">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="exampleInputEmail3" class="col-sm-3 control-label">
                                 Unit Description
+                                <span class="text-danger">*</span>
                             </label>
                             <div class="col-sm-9">
-                            <textarea class="form-control" id="exampleInputEmail3" rows="10" name="description"
-                                      placeholder="description"></textarea>
+                                <textarea class="form-control" id="exampleInputEmail3" rows="10" name="description" placeholder="description"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -65,5 +63,4 @@
             </div>
         </div>
     </div>
-
 @endsection
